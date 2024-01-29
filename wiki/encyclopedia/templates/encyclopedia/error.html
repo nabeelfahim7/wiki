@@ -11,7 +11,12 @@
     <hr>
     <br>
 
-    <h6>The page you requested was not found</h6>
+    {% if flag %}
+        <h6>The page you requested was not found</h6>
+    {% else %}
+        <h6>Provided title already exists in the encyclopedia</h6>
+    {% endif %}
+
 
 
 {% endblock %}
