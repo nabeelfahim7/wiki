@@ -4,8 +4,14 @@
     {{ TITLE }}
 {% endblock %}
 
+
+
 {% block body %}
 
     {{ html_content |safe}}
+
+
+    <a href="{% url 'edit' %}"> edit page</a>
+   
     
 {% endblock %}

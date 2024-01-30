@@ -28,6 +28,7 @@ def index(request):
     })
 
 def page_render(request, TITLE):
+    request.session["title"] = TITLE
     md_content = util.get_entry(TITLE)
     if md_content is None:
         return render(request, "encyclopedia/error.html", {"flag" : True})
@@ -48,3 +49,13 @@ def create(request):
 
     return render(request, "encyclopedia/newpage.html")
 
+
+def edit(request):
+    title = request.session["title"]
+    if request.method == "POST":
+        mdcontent = request.POST.get('markdowncont')
+        util.save_entry(title, mdcontent)
+        return HttpResponseRedirect(f"/wiki/{title}")
+
+    content = util.get_entry(title)
+    return render(request, "encyclopedia/edit.html", {"content" : content})
